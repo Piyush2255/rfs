@@ -1,0 +1,201 @@
+*{
+	margin-right: 0;
+}
+#main{
+		width: 100%;
+		height: 100vh;
+		background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(images/notepad1.jpg);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: top; 
+}
+#mainhead{
+	margin-left: 25%;
+	font-size: 80px;
+}
+#col{
+	color: #FFCCBC;
+	margin-top: 20vh;
+	/*color: rgb(255, 137, 74);*/
+}
+nav{
+	width: 100%;
+	height: 60px;
+	background-color: #fff0;
+	line-height: 60px;
+}
+nav .menu{
+	float: right;
+	margin-right: 30px;
+}
+nav .menu .menu_item{
+	list-style-type: none;
+	display: inline-block;
+	position: relative;
+	transition: 0.3s ease;
+}
+nav .menu .menu_item:hover{
+	background-color: rgb(245, 137, 5);
+	transition: 0.3s ease;
+}
+nav .menu .menu_item a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+nav .menu .menu_item a{
+	text-decoration: none;
+	color: #fff;
+	padding: 12px 24px;
+	display: block;
+}
+.submenu{
+	display: none;
+	position: absolute;
+	width: 200px;
+	background-color: rgba(0,0,0,0.8);
+	padding: 0px;
+	text-decoration: none;
+	list-style-type: none;
+}
+.menu_item:hover .submenu{	
+	display: block;
+	text-decoration: none;
+	position: left;
+	transition: 0.3s ease;
+}
+.submenu_item:hover{
+	background-color: rgba(0,0,0,0.6);
+	border-left: 4px solid rgba(245, 177, 20,0.8);
+	text-decoration: none;
+}
+.heading{
+	color: #fff;
+	position:absolute;
+	top: 20vh;
+	/*left: 35%;*/
+	margin-left: 25%;
+	margin-right: 25%;
+	align-content: center;
+
+}
+#candidate{
+	width: 100%;
+	height: 55vh;
+	margin-bottom: 20px;
+}
+#candinfo{
+	margin-left: 30px;
+	margin-top: 35px;
+}
+#recinfo{
+	margin-left: 38%;
+	margin-top: 35px;
+}
+.submit-btn{
+	margin-top: 50px;
+	width: 15%;
+	padding: 10px 30px;
+	cursor: pointer;
+	display: block;
+	margin: auto;
+	background: linear-gradient(to right,#ff105f, #ffad06);
+	border: 0;
+	outline: none;
+	border-radius: 30px;
+}
+#candimg{
+	width: 35%;
+	height: 50vh;
+	float: right;
+	margin-top: 10px;
+
+}
+#candhead{
+	padding-top: 30px;
+	padding-left: 30%;
+	color: rgb(245, 137, 5);
+}
+#recruiter{
+	width: 100%;
+	height: 55vh;
+	margin: auto;
+}
+#recimg{
+	width: 35%;
+	height: 50vh;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+#rechead{
+	padding-top: 30px;
+	padding-left: 60%;
+	color: rgb(245, 137, 5);
+}
+#sector{
+	width: 100%;
+	height: 60vh;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(images/tea.jpeg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top;
+}
+#sectorhead{
+	padding-top: 30px;
+	padding-left: 45%;
+	color: rgb(245, 137, 5);
+}
+.sectorcard{
+	margin-top: 40px;
+	margin-left: 3%;
+	margin-right: 3%;
+	height: 30vh;
+	transition: 0.2s ease;
+}
+.sectorcard:hover{
+	transform: scale(1.1);
+	background-color: #F44336;
+	transition: 0.2s ease;
+}
+.sectorcard:hover #sectoricon{
+	color: #fff;
+}
+.sectorcard:hover .card-title{
+	color: #fff;
+}
+.card-title{
+	/*margin-left: 15%;*/
+	text-align: center;
+	margin-top: 15%;
+	/*color: cyan ;*/
+	font-size: 40px;
+}
+#sectoricon{
+	margin-left: 40%;
+	font-size: 30px;
+}
+#creators{
+	width: 100%;
+	height: 50vh;
+}
+#creatorshead{
+	padding-top: 30px;
+	padding-left: 45%;
+	color: rgb(245, 137, 5);
+}
+.creatorimg{
+	width: 20%;
+	height: 40vh;
+	margin-top: 2%;
+	margin-bottom: 1%;
+
+}
+#img1{
+	margin-left: 29%;
+	margin-right: 5%;
+}
+#img2{
+	margin-right: 10%;
+}

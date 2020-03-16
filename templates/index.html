@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>RPGRecruiter</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'start2.css' %}">
+</head>
+<body>
+	<div id='main'>
+		<nav>
+			<ul class='menu'>
+				<li class='menu_item'>
+					<a href="">Home</a>
+				</li>
+				<li class='menu_item'>
+					<a href="">About</a>
+				</li>
+				<li class='menu_item'>
+					<a href="">Login</a>
+					<ul class='submenu'>
+						<li class='submenu_item'>
+							<a href="{% url 'login' %}">Candidate</a>
+						</li>
+						<li class='submenu_item'>
+							<a href="{% url 'login' %}">Recruiter</a>
+						</li>
+					</ul>
+				</li>
+				<li class='menu_item'>
+					<a href="">Sign Up</a>
+					<ul class='submenu'>
+						<li class='submenu_item'>
+							<a href="{% url 'login' %}">Candidate</a>
+						</li>
+						<li class='submenu_item'>
+							<a href="{% url 'login' %}">Recruiter</a>
+						</li>
+					</ul>
+				</li>
+				<li class='menu_item'>
+					<a href="">Contact</a>
+				</li>
+			</ul>
+		</nav>
+		<div class='heading'>
+			<p>
+				<h1 id='mainhead'>WELCOME</h1>
+			</p>
+			<p>
+				<h3 id="col">Hello visitor, we have 5 million+ jobs open!!</h3>
+			</p>
+			<p>
+				<h2>You can also list your job post here, It's Free! </h2>
+			</p>
+		</div>
+	</div>
+	<div id='candidate'>
+		<img src="{% static 'rfs_app\images\laptop1.jpeg' %}" id='candimg' alt='Candidate'>
+		<h1 id='candhead'>Candidate</h1>
+		<div id='candinfo'>
+			<p>
+				<h3>Want a Job??</h3>
+				<h3 >A complete guide for starting and ultimately ending your job search..</h3>
+			</p>
+		</div>
+		<button type="submit" class="submit-btn"><strong>Search</strong> </button>
+	</div>
+	<div id='recruiter'>
+		<img src="{% static 'rfs_app\images\office.jpg' %}" alt='Recruiter' id='recimg'>
+		<h1 id='rechead'>Recruiter</h1>
+		<p>
+			<h3 id='recinfo'>A comprehensive guide for registering your company domain and ultimately start recruiting the best candidates..
+			</h3>
+		</p>
+		<button type="submit" class="submit-btn"><strong>Post Job</strong> </button>
+	</div>
+	<div id='sector'>
+		<h1 id='sectorhead'>SECTORS</h1>
+		<div class='row'>
+			<div class="card sectorcard" style="width: 18rem;">
+	  			<div class="card-body">
+	    			<h5 class="card-title">IT Sector</h5>
+	    			<span id='sectoricon'>
+	    				<i class="fas fa-laptop-code"></i>
+	    			</span>
+	  			</div>
+			</div>
+			<div class="card sectorcard" style="width: 18rem;">
+	  			<div class="card-body">
+	    			<h5 class="card-title">Marketing</h5>
+	    			<span>
+	    				<i class="fas fa-bullhorn" id='sectoricon'></i>
+	    			</span>
+	  			</div>
+			</div>
+			<div class="card sectorcard" style="width: 18rem;">
+	  			<div class="card-body">
+	    			<h5 class="card-title">Design</h5>
+	    			<span id='sectoricon'>
+	    				<i class="fas fa-palette"></i>
+	    			</span>
+	  			</div>
+			</div>
+			<div class="card sectorcard" style="width: 18rem;">
+	  			<div class="card-body">
+	    			<h5 class="card-title">Medical</h5>
+	    			<span id='sectoricon'>
+	    				<i class="fas fa-briefcase-medical"></i>
+	    			</span>
+	  			</div>
+			</div>
+		</div>
+	</div>
+	<div id='creators'>
+		<h1 id="creatorshead">CREATORS</h1>
+		<img src="https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg" alt='Piyush' class="creatorimg" id='img1'>
+		<img src="https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg" alt='Rahul' class="creatorimg" id='img2'>
+	</div>
+</body>
+</html>
