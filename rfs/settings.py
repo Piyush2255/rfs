@@ -137,4 +137,4 @@ STATICFILES_DIRS=[
 MEDIA_ROOT=MEDIA_DIR
 MEDIA_URL='/media/'
 
-# LOGIN_URL='/rfs_app/user_login'
+LOGIN_URL='/user_login/'

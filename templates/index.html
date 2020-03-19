@@ -5,7 +5,7 @@
 	<title>RPGRecruiter</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'start2.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'start1.css' %}">
 </head>
 <body>
 	<div id='main'>
@@ -21,21 +21,22 @@
 					<a href="">Login</a>
 					<ul class='submenu'>
 						<li class='submenu_item'>
-							<a href="{% url 'login' %}">Candidate</a>
+							<a href="{% url 'candlogin' %}">Candidate</a>
 						</li>
 						<li class='submenu_item'>
-							<a href="{% url 'login' %}">Recruiter</a>
+							<a href="{% url 'reclogin' %}">Recruiter</a>
 						</li>
+						
 					</ul>
 				</li>
 				<li class='menu_item'>
 					<a href="">Sign Up</a>
 					<ul class='submenu'>
 						<li class='submenu_item'>
-							<a href="{% url 'login' %}">Candidate</a>
+							<a href="{% url 'cand_register' %}" name="candregister">Candidate</a>
 						</li>
 						<li class='submenu_item'>
-							<a href="{% url 'login' %}">Recruiter</a>
+							<a href="{% url 'rec_register' %}" name="recregister">Recruiter</a>
 						</li>
 					</ul>
 				</li>
@@ -57,7 +58,7 @@
 		</div>
 	</div>
 	<div id='candidate'>
-		<img src="{% static 'rfs_app\images\laptop1.jpeg' %}" id='candimg' alt='Candidate'>
+		<img src="{% static 'images\laptop1.jpeg' %}" id='candimg' alt='Candidate'>
 		<h1 id='candhead'>Candidate</h1>
 		<div id='candinfo'>
 			<p>
@@ -65,16 +66,16 @@
 				<h3 >A complete guide for starting and ultimately ending your job search..</h3>
 			</p>
 		</div>
-		<button type="submit" class="submit-btn"><strong>Search</strong> </button>
+		<button type="submit" class="submit-btn" ><a href="{% url 'cand_register' %}"><strong>Search</strong></a> </button>
 	</div>
 	<div id='recruiter'>
-		<img src="{% static 'rfs_app\images\office.jpg' %}" alt='Recruiter' id='recimg'>
+		<img src="{% static 'images\office.jpg' %}" alt='Recruiter' id='recimg'>
 		<h1 id='rechead'>Recruiter</h1>
 		<p>
 			<h3 id='recinfo'>A comprehensive guide for registering your company domain and ultimately start recruiting the best candidates..
 			</h3>
 		</p>
-		<button type="submit" class="submit-btn"><strong>Post Job</strong> </button>
+		<button type="submit" class="submit-btn"><a href="{% url 'rec_register' %}"><strong>Post Job</strong></a> </button>
 	</div>
 	<div id='sector'>
 		<h1 id='sectorhead'>SECTORS</h1>

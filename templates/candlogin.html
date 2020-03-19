@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'login1.css' %}">
+	<title></title>
+</head>
+<body>
+	<div class="log">
+		<div class="form-box">
+			<div class="button-box">
+				<div id="btn"></div>
+				<!-- <button type="button" class="toggle-btn" onclick="login()">Log In</button> -->
+				<button type="button" class="toggle-btn">Log In</button>
+			</div>
+
+		
+		<form id="login" class="input-group" action="{% url 'user_login' %}" method='POST'>
+			{% csrf_token %}
+			<input type="hidden" name="iscand" value="True">
+			<input type="text" class="input-field" placeholder="Username" name="Username" required>
+			<input type="password" class="input-field" placeholder="Enter Password" name="Password" required>
+			<!-- <input type="checkbox" class="check-box"><span>Remember Password</span>  -->
+			<button type="submit" class="submit-btn">Log in</button>
+		</form>
+		</div>
+	</div>
+	<!-- <script >
+		var x= document.getElementById("login");
+		var y= document.getElementById("register");
+		var z= document.getElementById("btn");
+		register();
+		function register() {
+			x.style.left= "-400px";
+			y.style.left= "50px";
+			z.style.left= "110px";
+
+			// body...
+		}
+		function login() {
+			x.style.left= "50px";
+			y.style.left= "450px";
+			z.style.left= "0px";
+
+			// body...
+		}
+
+	</script> -->
+
+</body>
+</html>

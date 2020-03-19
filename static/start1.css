@@ -103,6 +103,10 @@ nav .menu .menu_item a{
 	outline: none;
 	border-radius: 30px;
 }
+.submit-btn a{
+	text-decoration: none;
+	color: #000;
+}
 #candimg{
 	width: 35%;
 	height: 50vh;

@@ -21,5 +21,9 @@ from candidate import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
-    path('login',views.login,name='login'),
+    path('cand_register',views.cand_register,name='cand_register'),
+    path('rec_register',views.rec_register,name='rec_register'),
+    path('candlogin',views.candlogin,name='candlogin'),
+    path('reclogin',views.reclogin,name='reclogin'),
+    path('user_login/',views.user_login,name='user_login'),
 ]

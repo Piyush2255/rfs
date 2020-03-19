@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from candidate.models import UserProfileInfo
+from candidate.models import UserProfileInfo,RecruiterProfileInfo
 from django.contrib.auth.forms import UserCreationForm
 
 class UserForm(forms.ModelForm):
@@ -16,3 +16,8 @@ class UserProfileInfoForm(forms.ModelForm):
 	class Meta():
 		model=UserProfileInfo
 		fields=('email','profile_pic')
+
+class RecruiterProfileInfoForm(forms.ModelForm):
+	class Meta():
+		model=RecruiterProfileInfo
+		fields=('Company_Name','email','profile_pic')

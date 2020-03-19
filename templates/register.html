@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'login1.css' %}">
+	<title></title>
+</head>
+<body>
+	<div class="log">
+		<div class="form-box">
+			<div class="button-box">
+				<div id="btn"></div>
+				<!-- <button type="button" class="toggle-btn" onclick="login()">Log In</button> -->
+				<button type="button" class="toggle-btn">Sign Up</button>
+			</div>
+
+		{% if registered %}
+			<h1 id='head'>Thanks for registering</h1>
+			{% if is_candidate %}
+				<a href="{% url 'candlogin' %}" class='loginlink'>Click Here to Login</a>
+			{% else %}
+				<a href="{% url 'reclogin' %}" class='loginlink'>Click Here to Login</a>
+			{% endif %}
+		{% else %}	
+			<form id="register" enctype="multipart/form-data" class="input-group" method='POST'>
+				{% csrf_token %}
+				{{ user_form.as_p }}
+				{{ profile_form.as_p }}
+
+				<button type="submit" class="submit-btn">Register</button>
+				<div id='switch'>
+			{% if is_candidate %}
+				<a href="{% url 'candlogin' %}">Already have an account? Log In</a>
+			{% else %}
+				<a href="{% url 'reclogin' %}">Already have an account? Log In</a>
+			{% endif %}
+				</div>
+			</form>
+		{% endif %}
+			
+		</div>
+
+	</div>
+	<!-- <script >
+		var x= document.getElementById("login");
+		var y= document.getElementById("register");
+		var z= document.getElementById("btn");
+		register();
+		function register() {
+			x.style.left= "-400px";
+			y.style.left= "50px";
+			z.style.left= "110px";
+
+			// body...
+		}
+		function login() {
+			x.style.left= "50px";
+			y.style.left= "450px";
+			z.style.left= "0px";
+
+			// body...
+		}
+
+	</script> -->
+
+</body>
+</html>

@@ -20,12 +20,12 @@
 	margin: 6% auto;
 	background: #fff;
 	padding: 5px;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .button-box{
-	width: 220px;
-	margin: 35px auto;
+	width: 110px;
+	margin: 35px 135px 10px;
 	position: relative;
 	box-shadow: 0 0 20px 9px #ff61241f;
 	border-radius: 30px; 
@@ -53,13 +53,22 @@
 	transition: 0.5s;
 }
 
+#head{
+	margin-top: 20%;
+	margin-left: 10%;
+}
+.loginlink{
+	margin-top: 10px;
+	margin-left: 10%;
+}
 .input-group{
-	top: 180px;
+	top: 100px;
 	position: absolute;
-	width: 280px;
+	/*width: 280px;*/
 	transition: .5s;
 
 }
+
 .input-field{
 	width:100%;
 	padding: 10px 0;
@@ -71,13 +80,20 @@
 	outline: none;
 	background: transparent;
 }
-
+p{
+	margin-bottom: 10px;
+}
+label{
+	font-weight: bold;
+}
 .submit-btn{
-	width: 85%;
+	width: 75%;
 	padding: 10px 30px;
 	cursor: pointer;
 	display: block;
-	margin: auto;
+	/*margin: auto;*/
+	margin-top: 20px;
+	margin-left: 20px;
 	background: linear-gradient(to right,#ff105f, #ffad06);
 	border: 0;
 	outline: none;
@@ -86,16 +102,22 @@
 .check-box{
 	margin: 30px 10px 30px 0;
 }
+div #switch{
+	position: relative;
+	margin-left: 10%;
+	margin-top: 5px;
+}
 
 span{
 	color: #777;
 	font-size: 12px;
 	bottom: 68px;
-	position: absolute;
+	/*position: absolute;*/
 }
 
 #login{
 	left:50px;
+	margin-top: 10%;
 }
 #register{
 	left: 50px;
