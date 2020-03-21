@@ -12,8 +12,8 @@ class UserProfileInfo(models.Model):
 	# last_name=models.CharField(max_length=20,required=False)
 	USERNAME_FIELD='username'
 
-	# def __str__(self):
-	# 	return self.user.username
+	def __str__(self):
+		return self.user.username
 
 class RecruiterProfileInfo(models.Model):
 	user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -21,3 +21,6 @@ class RecruiterProfileInfo(models.Model):
 	Company_Name=models.CharField(max_length=50,blank=False)
 	email=models.EmailField(primary_key=True)	
 	profile_pic=models.ImageField(upload_to='profile_pics',blank=True)
+
+	def __str__(self):
+		return self.user.username

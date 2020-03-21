@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Profile</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
+</head>
+<body>
+	<!-- <p>{{ user }}</p>
+	<p>{{ user.first_name }}
+	{{ user.last_name }}</p>
+	<p>{{ user.recruiterprofileinfo.email }}</p>
+	<p>{{ user.recruiterprofileinfo.Company_Name }}</p>
+	<img src="{{ user.recruiterprofileinfo.profile_pic.url }}"> -->
+	<input type="checkbox" id="check">
+    <header>
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+    </header>
+    <div class="sidebar">
+      <center>
+        <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        <h4>{{ user.username }}</h4>
+      </center>
+      <a href="{% url 'recdashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
+      <a href="#"><i class="fas fa-th"></i><span>Profile</span></a>
+      <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
+      <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+      <a href="{% url 'user_logout' %}"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+    </div>
+
+    <div class="content">
+    	<center>
+        	<img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        </center>
+    </div>
+    <div class="info">
+    	<center>
+    		<h1 id="name">{{ user.first_name }} {{ user.last_name }}</h1>
+    	</center>
+    	<p class='username'><strong>Username: </strong>{{ user.username }}</p>
+    	<p class='username'><strong>Email: </strong>{{ user.recruiterprofileinfo.email }}</p>
+    	<p class='username'><strong>Company Name: </strong>{{ user.recruiterprofileinfo.Company_Name }}</p>
+    </div>
+</body>
+</html>

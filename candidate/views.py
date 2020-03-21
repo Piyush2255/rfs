@@ -4,6 +4,9 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse,HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 # Create your views here.
 def index(request):
 	return render(request,'index.html')
@@ -120,14 +123,39 @@ def user_login(request):
 
 			if user.is_active:
 				login(request,user)
-				if is_candidate:
-					return HttpResponse('Candidate is Logged in')
+				print(is_candidate)
+				if is_candidate=='True':
+					return HttpResponseRedirect('canddashboard')
 				else:
-					return HttpResponse('Recruiter is Logged in')
+					return HttpResponseRedirect('recdashboard')
 
 		else:
 			# messages.error(request,"Invalid Login Details")
-			return render(request,'login.html',context=candict)
+			if is_candidate=='True':
+				return render(request,'candlogin.html')
+			else:
+				return render(request,'reclogin.html')
 
 	else:
-		return render(request,'login.html')
+		return render(request,'reclogin.html')
+
+@login_required
+def user_logout(request):
+	logout(request)
+	return HttpResponseRedirect(reverse('index'))
+
+def canddashboard(request):
+	args={'user':request.user}
+	return render(request,'canddashboard.html',context=args)
+
+def recdashboard(request):
+	args={'user':request.user}
+	return render(request,'recdashboard.html',context=args)
+
+def candprofile(request):
+	args={'user':request.user}
+	return render(request,'candprofile.html',context=args)
+
+def recprofile(request):
+	args={'user':request.user}
+	return render(request,'recprofile.html',context=args)

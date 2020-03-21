@@ -80,7 +80,7 @@ nav .menu .menu_item a{
 }
 #candidate{
 	width: 100%;
-	height: 55vh;
+	height: 50vh;
 	margin-bottom: 20px;
 }
 #candinfo{
@@ -109,7 +109,7 @@ nav .menu .menu_item a{
 }
 #candimg{
 	width: 35%;
-	height: 50vh;
+	height: 45vh;
 	float: right;
 	margin-top: 10px;
 
@@ -121,12 +121,12 @@ nav .menu .menu_item a{
 }
 #recruiter{
 	width: 100%;
-	height: 55vh;
+	height: 50vh;
 	margin: auto;
 }
 #recimg{
 	width: 35%;
-	height: 50vh;
+	height: 45vh;
 	float: left;
 	margin-top: 20px;
 	margin-bottom: 5px;
@@ -139,7 +139,7 @@ nav .menu .menu_item a{
 #sector{
 	width: 100%;
 	height: 60vh;
-	margin-top: 10px;
+	margin-top: 5px;
 	margin-bottom: 30px;
 	background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(images/tea.jpeg);
 	background-size: cover;

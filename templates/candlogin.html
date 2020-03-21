@@ -17,7 +17,7 @@
 		
 		<form id="login" class="input-group" action="{% url 'user_login' %}" method='POST'>
 			{% csrf_token %}
-			<input type="hidden" name="iscand" value="True">
+			<input type="hidden" name="iscand" value=True>
 			<input type="text" class="input-field" placeholder="Username" name="Username" required>
 			<input type="password" class="input-field" placeholder="Enter Password" name="Password" required>
 			<!-- <input type="checkbox" class="check-box"><span>Remember Password</span>  -->
