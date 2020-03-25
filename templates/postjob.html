@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
+  <link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'postjob1.css' %}">
+  
+  
+</head>
+<body>
+  <input type="checkbox" id="check">
+    <header>
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+    </header>
+    <div class="sidebar">
+      <center>
+        <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        <h4>{{ user.username }}</h4>
+      </center>
+      <a href="{% url 'recdashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="#" class="active"><i class="fas fa-briefcase"></i><span>Post Job</span></a>
+      <a href="{% url 'recprofile' %}"><i class="fas fa-th"></i><span>Profile</span></a>
+      <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
+      <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
+      <a href="{% url 'user_logout' %}"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+    </div>
+
+    <div class="content">
+      <center>
+        <h1 id="jobname">Job Form</h1>
+      </center>
+      <form action="{% url 'jobconfirm' %}" method="POST">
+        {% csrf_token %}
+        <p >
+          <label class="formlabel">Job Name: </label>
+        </p>
+        <p>
+          <input type="text" name="job_name" placeholder="Job Name" class="forminput" required>
+        </p>
+        <p>
+          <label class="formlabel">Job Description: </label>
+        </p>
+        <p>
+          <textarea rows="3" cols="80" placeholder="Enter Job Description" name="job_description" class="forminput" required></textarea>
+        </p>
+        <p>
+          <label class="formlabel">Skills: </label>
+        </p>
+        <p>
+          <input type="text" name="skill" placeholder="Enter skills seperated by commas" class="forminput" required>
+        </p>
+        <p>
+          <label class="formlabel">Experience: </label>
+        </p>
+        <p>
+          <select name="experience" class="forminput">
+            <option value="Fresher">Fresher</option>
+            <option value="1-5 years">1-5 years</option>
+            <option value="5-10 years">5-10 years</option>
+            <option value="10-15 years">10-15 years</option>
+            <option value="15+ years">15+ years</option>
+            <option value="Any">Any</option>
+          </select>
+        </p>
+        <p>
+          <label class="formlabel">Salary: </label>
+        </p>
+        <p>
+          <input type="number" name="salary" placeholder="Expected Salary" class="forminput" required>
+        </p>
+        <p>
+          <label class="formlabel">Deadline: </label>
+        </p>
+        <p>
+          <input type="date" name="deadline" class="forminput" required>
+        </p>
+        <center>
+        <button type="submit" class="btn btn-success" id="formbutton">Submit</button>
+        </center>
+      </form>
+    </div>
+
+</body>
+</html>

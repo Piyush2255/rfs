@@ -8,12 +8,12 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
 </head>
 <body>
-	<!-- {{ user }}
-	{{ user.first_name }}
-	{{ user.last_name }}
-	{{ user.userprofileinfo.email }}
-	{{ user.userprofileinfo.profile_pic.url }}
-	<img src="{{ user.userprofileinfo.profile_pic.url }}"> -->
+	<!-- <p>{{ user }}</p>
+	<p>{{ user.first_name }}
+	{{ user.last_name }}</p>
+	<p>{{ user.recruiterprofileinfo.email }}</p>
+	<p>{{ user.recruiterprofileinfo.Company_Name }}</p>
+	<img src="{{ user.recruiterprofileinfo.profile_pic.url }}"> -->
 	<input type="checkbox" id="check">
     <header>
       <label for="check">
@@ -22,12 +22,12 @@
     </header>
     <div class="sidebar">
       <center>
-        <img src="{{ user.userprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
         <h4>{{ user.username }}</h4>
       </center>
-      <a href="{% url 'canddashboard' %}" ><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-      <a href="#"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
-      <a href="#" class="active"><i class="fas fa-th"></i><span>Profile</span></a>
+      <a href="{% url 'recdashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="{% url 'postjob' %}" class="active"><i class="fas fa-briefcase"></i><span>Post Job</span></a>
+      <a href="#"><i class="fas fa-th"></i><span>Profile</span></a>
       <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
       <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
       <a href="{% url 'user_logout' %}"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
@@ -35,17 +35,17 @@
 
     <div class="content">
     	<center>
-        	<img src="{{ user.userprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        	<img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
         </center>
     </div>
     <div class="info">
     	<center>
     		<h1 id="name">{{ user.first_name }} {{ user.last_name }}</h1>
     	</center>
-    	<p class='username'><strong>Username: </strong>{{ user.username }}</p>
-    	<p class='username'><strong>Email: </strong>{{ user.userprofileinfo.email }}</p>
+    	<p class='username'><strong>Job Name: </strong>{{ job_name }}</p>
+    	<p class='username'><strong>Job Description: </strong>{{ job_description }}</p>
+    	<p class='username'><strong>Deadline: </strong>{{ deadline }}</p>
+      <p class='username'><strong>Salary: </strong>{{ salary }}</p>
     </div>
 </body>
 </html>
-
-

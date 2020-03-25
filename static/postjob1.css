@@ -2,10 +2,11 @@ body{
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
+  background: #2f323a;
 }
 
 header{
-  position: fixed;
+  /*position: fixed;*/
   background: #22242A;
   padding: 20px;
   width: 100%;
@@ -45,7 +46,7 @@ header{
 
 .sidebar {
   background: #2f323a;
-  margin-top: 40px;
+  /*margin-top: 40px;*/
   padding-top: 30px;
   position: fixed;
   left: 0;
@@ -66,6 +67,7 @@ header{
   color: #ccc;
   margin-top: 0;
   margin-bottom: 20px;
+  transition: 0.5s;
 }
 
 .sidebar a{
@@ -86,6 +88,7 @@ header{
 
 .active{
   background: #19B3D3;
+  transition: 0.5s;
 }
 
 .sidebar i{
@@ -127,11 +130,13 @@ label #sidebar_btn:hover{
 
 .content{
   margin-left: 250px;
-  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(https://cdn.pixabay.com/photo/2016/11/23/13/48/beach-1852945_1280.jpg) no-repeat;
+  /*background: url(https://cdn.pixabay.com/photo/2016/11/23/13/48/beach-1852945_1280.jpg) no-repeat;*/
+  background: white;
   background-position: center;
   background-size: cover;
-  height: 50vh;
+  /*height: 100vh;*/
   transition: 0.5s;
+  /*margin-top: 40px;*/
 }
 
 #check:checked ~ .content{
@@ -142,30 +147,41 @@ label #sidebar_btn:hover{
   display: none;
 }
 
-.content .profile_image{
-  width: 200px;
-  height: 200px;
-  border-radius: 200px;
+#jobname{
+  margin-top: 0px;
   margin-bottom: 10px;
-  margin-top: 250px;
+  font-weight: bold;
+  /*font-size: 30px;*/
 }
 
-.info{
-  margin-left: 250px;
+.formlabel{
+  margin-left: 20px;
+  font-weight: bold;
+  /*margin-bottom: 30px;*/
+  font-size: 20px;
+}
+
+.forminput{
+  width: 900px;
+  margin-left: 80px;
+  margin-bottom: 5px;
   transition: 0.5s;
 }
 
-#name{
-  margin-top: 90px;
-  /*color: rgb(14, 138, 240);*/
-  /*font-weight: bold;*/
+#formbutton{
+  /*margin-left: 20px;*/
+  margin-bottom: 45px;
+  margin-top: 20px;
 }
 
-#check:checked ~ .info{
-  margin-left: 60px;
+#check:checked ~ .content .forminput{
+  width: 1090px;
 }
 
-.username{
-  font-size: 25px;
-  margin-left: 10px;
+p{
+  margin-bottom: 2px;
+  margin-top: 5px;
+}
+label{
+  margin-bottom: 5px;
 }

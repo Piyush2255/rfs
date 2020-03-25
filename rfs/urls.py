@@ -32,5 +32,7 @@ urlpatterns = [
     path('recdashboard',views.recdashboard,name='recdashboard'),
     path('candprofile',views.candprofile,name='candprofile'),
     path('recprofile',views.recprofile,name='recprofile'),
+    path('postjob',views.postjob,name='postjob'),
+    path('jobconfirm',views.jobconfirm,name='jobconfirm'),
     path('user_logout',views.user_logout,name='user_logout')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

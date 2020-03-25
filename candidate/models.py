@@ -24,3 +24,25 @@ class RecruiterProfileInfo(models.Model):
 
 	def __str__(self):
 		return self.user.username
+
+class JobInfo(models.Model):
+
+	recruiter=models.ForeignKey(User,on_delete=models.CASCADE)
+	job_name=models.CharField(max_length=50,blank=False)
+	job_description=models.TextField(blank=False)
+	experience=models.CharField(blank=False,max_length=15)
+	deadline=models.DateField(blank=False)
+	skill=models.CharField(max_length=30,blank=False)
+	salary=models.IntegerField(blank=False)
+	posting_date=models.DateField(blank=False)
+
+	def __str__(self):
+		return self.job_name
+
+# class ApplicationInfo(models.Model):
+
+# 	candidate=models.ForeignKey(User,on_delete=models.CASCADE)
+# 	job=models.ForeignKey(JobInfo,on_delete=models.CASCADE)
+# 	resume=models.FileField(upload_to='resumes',blank=False)
+# 	score=models.IntegerField(blank=False)
+	

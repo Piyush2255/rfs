@@ -7,6 +7,8 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from datetime import date,datetime
+from candidate.models import UserProfileInfo,RecruiterProfileInfo,JobInfo
 # Create your views here.
 def index(request):
 	return render(request,'index.html')
@@ -144,18 +146,48 @@ def user_logout(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('index'))
 
+@login_required
 def canddashboard(request):
-	args={'user':request.user}
+	today=date.today()
+	today=today.strftime('%Y-%m-%d')
+	jobs=JobInfo.objects.filter(deadline__gte=today)
+	args={'user':request.user,'jobs':jobs}
 	return render(request,'canddashboard.html',context=args)
 
+@login_required
 def recdashboard(request):
-	args={'user':request.user}
+	jobs=JobInfo.objects.filter(recruiter=request.user).order_by('-posting_date','-deadline')
+	print(jobs)
+	args={'user':request.user,'jobs':jobs}
 	return render(request,'recdashboard.html',context=args)
 
+@login_required
 def candprofile(request):
 	args={'user':request.user}
 	return render(request,'candprofile.html',context=args)
 
+@login_required
 def recprofile(request):
 	args={'user':request.user}
 	return render(request,'recprofile.html',context=args)
+
+@login_required
+def postjob(request):
+	return render(request,'postjob.html')
+
+@login_required
+def jobconfirm(request):
+	if request.method=='POST':
+		jobname=request.POST.get('job_name')
+		jobdesc=request.POST.get('job_description')
+		skills=request.POST.get('skill')
+		experiences=request.POST.get('experience')
+		expsalary=request.POST.get('salary')
+		deaddate1=request.POST.get('deadline')
+		deaddate=datetime.strptime(deaddate1,"%Y-%m-%d")
+		today=date.today()
+		postdate=today.strftime("%Y-%m-%d")
+		recuser=request.user
+		JobInfo.objects.create(job_name=jobname,job_description=jobdesc,skill=skills,experience=experiences,salary=expsalary,deadline=deaddate,posting_date=postdate,recruiter=recuser)
+		args={'user':request.user,'job_name':jobname,'job_description':jobdesc,'skill':skills,'experience':experiences,'salary':expsalary,'deadline':deaddate,'posting_date':postdate}
+	return render(request,'jobconfirm.html',context=args)

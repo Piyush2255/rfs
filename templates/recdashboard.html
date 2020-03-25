@@ -2,10 +2,10 @@
 {% load staticfiles %}
 <html>
 <head>
-	<title></title>
+	<title>Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'dashboard1.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'dashboard.css' %}">
 	
 	
 </head>
@@ -21,15 +21,36 @@
         <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
         <h4>{{ user.username }}</h4>
       </center>
-      <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-      <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
+      <a href="#" class="active"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="{% url 'postjob' %}"><i class="fas fa-briefcase"></i><span>Post Job</span></a>
       <a href="{% url 'recprofile' %}"><i class="fas fa-th"></i><span>Profile</span></a>
       <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
-      <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+      <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
       <a href="{% url 'user_logout' %}"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
     </div>
 
-    <div class="content"></div>
+    <div class="content">
+      <center>
+        <h1>Dashboard</h1>
+      </center>
+      <p id="tablehead">Recently Posted Jobs</p>
+      <table>
+        <tr>
+          <th><center>Job Name</center></th>
+          <th><center>Salary</center></th>
+          <th><center>Posted On</center></th>
+          <th><center>Deadline</center></th>
+        </tr>
+        {% for job in jobs %}
+        <tr>
+          <td>{{ job.job_name }}</td>
+          <td>{{ job.salary }}</td>
+          <td>{{ job.posting_date }}</td>
+          <td>{{ job.deadline }}</td>
+        </tr>
+        {% endfor %}
+      </table>  
+    </div>
 
 </body>
 </html>

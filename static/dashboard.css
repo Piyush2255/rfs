@@ -5,7 +5,7 @@ body{
 }
 
 header{
-  position: fixed;
+  /*position: fixed;*/
   background: #22242A;
   padding: 20px;
   width: 100%;
@@ -45,7 +45,7 @@ header{
 
 .sidebar {
   background: #2f323a;
-  margin-top: 40px;
+  /*margin-top: 40px;*/
   padding-top: 30px;
   position: fixed;
   left: 0;
@@ -84,6 +84,10 @@ header{
   background: #19B3D3;
 }
 
+.active{
+  background: #19B3D3;
+}
+
 .sidebar i{
   padding-right: 10px;
 }
@@ -110,17 +114,19 @@ label #sidebar_btn:hover{
 
 #check:checked ~ .sidebar a span{
   display: none;
+  transition: 0.5s;
 }
 
 #check:checked ~ .sidebar a{
   font-size: 20px;
   margin-left: 170px;
   width: 80px;
+  transition: 0.5s;
 }
 
 .content{
   margin-left: 250px;
-  background: url(https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_1280.jpg) no-repeat;
+  background: url() no-repeat;
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -133,4 +139,35 @@ label #sidebar_btn:hover{
 
 #check{
   display: none;
+}
+
+h1{
+  margin-top: 10px;
+}
+
+#tablehead{
+  margin-left: 20px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+table{
+  margin-left: 20px;
+  width: 800px;
+}
+
+th{
+  border: 2px solid #19B3D3;
+  padding: 4px 4px;
+  background-color: #19B3D3;
+  color: white;
+}
+
+td{
+  border: 2px solid #19B3D3;
+  padding: 4px 4px;
+}
+
+tr:hover{
+  background-color: antiquewhite;
 }
