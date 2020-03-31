@@ -45,4 +45,8 @@ class JobInfo(models.Model):
 # 	job=models.ForeignKey(JobInfo,on_delete=models.CASCADE)
 # 	resume=models.FileField(upload_to='resumes',blank=False)
 # 	score=models.IntegerField(blank=False)
-	
+# 	status=models.BooleanField(blank=False)
+# 	interview_date=models.DateField(blank=True,default=None)
+
+# 	def __str__(self):
+# 		return self.candidate.username

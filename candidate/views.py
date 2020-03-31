@@ -150,7 +150,7 @@ def user_logout(request):
 def canddashboard(request):
 	today=date.today()
 	today=today.strftime('%Y-%m-%d')
-	jobs=JobInfo.objects.filter(deadline__gte=today)
+	jobs=JobInfo.objects.filter(deadline__gte=today)[:5]
 	args={'user':request.user,'jobs':jobs}
 	return render(request,'canddashboard.html',context=args)
 
@@ -191,3 +191,27 @@ def jobconfirm(request):
 		JobInfo.objects.create(job_name=jobname,job_description=jobdesc,skill=skills,experience=experiences,salary=expsalary,deadline=deaddate,posting_date=postdate,recruiter=recuser)
 		args={'user':request.user,'job_name':jobname,'job_description':jobdesc,'skill':skills,'experience':experiences,'salary':expsalary,'deadline':deaddate,'posting_date':postdate}
 	return render(request,'jobconfirm.html',context=args)
+
+@login_required
+def viewjob(request):
+	if request.method=='POST':
+		job_id=request.POST.get('job_id')
+		print(job_id)
+		job=JobInfo.objects.filter(id=job_id)
+		args={'user':request.user,'jobs':job}
+		return render(request,'viewjob.html',context=args)
+
+@login_required
+def jobapply(request):
+	if request.method=='POST':
+		job_id=request.POST.get('job_id')
+		job=JobInfo.objects.filter(id=job_id)
+		args={'user':request.user,'jobs':job}
+		return render(request,'jobapply.html',context=args)
+
+# @login_required
+# def confirmapply(request):
+# 	if request.method=='POST':
+# 		job_id=request.POST.get('job_id')
+# 		job=JobInfo.objects.filter(id=job_id)
+# 		cand=request.user

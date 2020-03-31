@@ -5,7 +5,7 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'dashboard.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'dashboard1.css' %}">
 	
 	
 </head>
@@ -42,15 +42,24 @@
           <th><center>Experience</center></th>
           <th><center>Deadline</center></th>
         </tr>
+        {% if jobs %}
+        <form action="jobapply" method="POST">
+          {% csrf_token %}
         {% for job in jobs %}
         <tr>
-          <td>{{ job.job_name }}</td>
+          <td><button name="job_id" value="{{ job.id }}">{{ job.job_name }}</button></td>
           <td>{{ job.recruiter.recruiterprofileinfo.Company_Name}}</td>
           <td>{{ job.salary }}</td>
           <td>{{ job.experience }}</td>
           <td>{{ job.deadline }}</td>
         </tr>
         {% endfor %}
+        </form>
+        {% else %}
+        <tr>
+          <td>No job available yet!</td>
+        </tr>
+        {% endif %}
       </table>
     </div>
 

@@ -169,5 +169,14 @@ td{
 }
 
 tr:hover{
-  background-color: antiquewhite;
+  background-color: aliceblue;
+}
+
+tr:hover button{
+  background-color: aliceblue;
+}
+
+button{
+  background-color: white;
+  border-width: 0px;
 }
