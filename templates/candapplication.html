@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'application.css' %}">
+	
+	
+</head>
+<body>
+	<input type="checkbox" id="check">
+    <header>
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+    </header>
+    <div class="sidebar">
+      <center>
+        <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        <h4>{{ user.username }}</h4>
+      </center>
+      <a href="{% url 'recdashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="{% url 'postjob' %}" class="active"><i class="fas fa-briefcase"></i><span>Post Job</span></a>
+      <a href="{% url 'recprofile' %}"><i class="fas fa-th"></i><span>Profile</span></a>
+      <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
+      <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
+      <a href="{% url 'user_logout' %}"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+    </div>
+
+    <div class="content">
+      {% for application in applications %}
+      <center>
+        <img src="{{ application.candidate.userprofileinfo.profile_pic.url }}" class="candimage">
+        <h1>{{ application.candidate.first_name }} {{ application.candidate.last_name }}</h1>
+      </center>
+      <a href="{{ application.resume.url }}">Open Resume</a>
+      {% if application.status %}
+        <p>Candidate has already been selected</p>
+      {% else %}
+      <form action="{% url 'applicationstatus' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="application_id" value="{{ application.id }}">
+        <p class="container">Want to select candidate?</p>
+        <label class="container">Yes
+        <input type="radio" checked="checked" name="select" value="True">
+        <span class="checkmark"></span>
+        </label>
+        <label class="container">No
+        <input type="radio" checked="checked" name="select" value="False">
+        <span class="checkmark"></span>
+        </label>
+        <p>
+          <label class="formlabel">Interview Details: </label>
+        </p>
+        <p>
+          <textarea rows="3" cols="80" class="forminput" placeholder="These details will be sent to applicant via email (max 150 characters)" name="intdetail" maxlength="150"></textarea>
+        </p>
+        <center>
+        <button class="btn btn-success">Confirm</button>
+        </center>
+      </form>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+</body>
+</html>

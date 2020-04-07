@@ -42,12 +42,19 @@
     	<center>
     		<h1 id="name">{{ user.first_name }} {{ user.last_name }}</h1>
     	</center>
+      <form action="{% url 'viewapplications' %}" method="POST">
+        {% csrf_token %}
     	{% for job in jobs %}
     	<p class='username'><strong>Job Name: </strong>{{ job.job_name }}</p>
     	<p class='username'><strong>Job Description: </strong>{{ job.job_description }}</p>
     	<p class='username'><strong>Deadline: </strong>{{ job.deadline }}</p>
-      	<p class='username'><strong>Salary: </strong>{{ job.salary }}</p>
-      	{% endfor %}
+      <p class='username'><strong>Salary: </strong>{{ job.salary }}</p>
+      <input type="hidden" name="job_id" value="{{ job.id }}">
+      {% endfor %}
+      <center>
+        <button class="btn btn-success">View Applications</button>
+      </center>
+      </form>
     </div>
 </body>
 </html>

@@ -39,14 +39,17 @@ class JobInfo(models.Model):
 	def __str__(self):
 		return self.job_name
 
-# class ApplicationInfo(models.Model):
+class ApplicationInfo(models.Model):
 
-# 	candidate=models.ForeignKey(User,on_delete=models.CASCADE)
-# 	job=models.ForeignKey(JobInfo,on_delete=models.CASCADE)
-# 	resume=models.FileField(upload_to='resumes',blank=False)
-# 	score=models.IntegerField(blank=False)
-# 	status=models.BooleanField(blank=False)
-# 	interview_date=models.DateField(blank=True,default=None)
+	candidate=models.ForeignKey(User,on_delete=models.CASCADE)
+	job=models.ForeignKey(JobInfo,on_delete=models.CASCADE)
+	resume=models.FileField(upload_to='resumes',blank=False)
+	score=models.IntegerField(blank=False)
+	status=models.BooleanField(blank=False,default=False)
+	# interview_info=models.CharField(max_length=150,blank=True,default='None')
 
-# 	def __str__(self):
-# 		return self.candidate.username
+	def __str__(self):
+		return self.candidate.username
+
+	class Meta:
+		unique_together=('candidate','job',)

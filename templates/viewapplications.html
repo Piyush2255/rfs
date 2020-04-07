@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'applications.css' %}">
+	
+	
+</head>
+<body>
+	<input type="checkbox" id="check">
+    <header>
+      <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+      </label>
+    </header>
+    <div class="sidebar">
+      <center>
+        <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        <h4>{{ user.username }}</h4>
+      </center>
+      <a href="{% url 'recdashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="{% url 'postjob' %}" class="active"><i class="fas fa-briefcase"></i><span>Post Job</span></a>
+      <a href="{% url 'recprofile' %}"><i class="fas fa-th"></i><span>Profile</span></a>
+      <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
+      <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
+      <a href="{% url 'user_logout' %}"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+    </div>
+
+    <div class="content">
+      <center>
+        <h1>Applications</h1>
+      </center>
+      <form action="{% url 'candapplication' %}" method="POST">
+        {% csrf_token %}
+      {% for application in applications %}
+      <div class="card">
+        <p>{{ forloop.counter }}. </p>
+        <img src="{{ application.candidate.userprofileinfo.profile_pic.url }}" class="candimage">
+        <button name="application_id" value="{{ application.id }}">{{ application.candidate.first_name }} {{ application.candidate.last_name }}</button>
+        {% if application.status %}
+        <p class="selected">Selected</p>
+        {% else %}
+        <p class="notselected">Not Selected</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+      </form>
+    </div>
+
+</body>
+</html>

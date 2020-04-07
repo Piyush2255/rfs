@@ -8,7 +8,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from datetime import date,datetime
-from candidate.models import UserProfileInfo,RecruiterProfileInfo,JobInfo
+from candidate.models import UserProfileInfo,RecruiterProfileInfo,JobInfo,ApplicationInfo
+from tika import parser
+import os,yagmail
 # Create your views here.
 def index(request):
 	return render(request,'index.html')
@@ -121,7 +123,6 @@ def user_login(request):
 		u=username
 
 		if user:
-			
 
 			if user.is_active:
 				login(request,user)
@@ -209,9 +210,95 @@ def jobapply(request):
 		args={'user':request.user,'jobs':job}
 		return render(request,'jobapply.html',context=args)
 
-# @login_required
-# def confirmapply(request):
-# 	if request.method=='POST':
-# 		job_id=request.POST.get('job_id')
-# 		job=JobInfo.objects.filter(id=job_id)
-# 		cand=request.user
+@login_required
+def confirmapply(request):
+	if request.method=='POST':
+		job_id=request.POST.get('job_id')
+		jobs=JobInfo.objects.filter(id=job_id)
+		cand=request.user
+		resum=request.POST.get('resume')
+		print(request.FILES['resume'])
+		if 'resume' in request.FILES:
+			resum=request.FILES['resume']
+		skills="abc"
+		for job in jobs:
+			skills=job.skill
+		skills=list(skills.split(","))
+		total_skills=len(skills)
+		each_skill_score=60/total_skills
+		total_score=0
+		application='a'
+		for job1 in jobs:
+			application=ApplicationInfo.objects.create(candidate=cand,job=job1,resume=resum,score=total_score,status=False)
+
+		base='C:\\Users\\HP\\Desktop\\Resume\\rfs'
+		file_data = parser.from_file(base+application.resume.url)
+		text=file_data['content']
+		text=str(text)
+		text=text.lower()
+		for skill in skills:
+			skill=skill.lower()
+			skill=skill.strip()
+			if skill in text:
+				total_score=total_score+each_skill_score
+
+		application.score=total_score
+		application.save()
+		args={'user':cand}
+		return render(request,'applconfirm.html',context=args)
+
+@login_required
+def viewapplications(request):
+	if request.method=='POST':
+		job_id=request.POST.get('job_id')
+		applications=ApplicationInfo.objects.filter(job=job_id).order_by('-score')
+		args={'user':request.user,'applications':applications}
+		return render(request,'viewapplications.html',context=args)
+
+@login_required
+def candapplication(request):
+	if request.method=='POST':
+		application_id=request.POST.get('application_id')
+		application=ApplicationInfo.objects.filter(id=application_id)
+		args={'user':request.user,'applications':application}
+		return render(request,'candapplication.html',context=args)
+
+@login_required
+def applicationstatus(request):
+	if request.method=='POST':
+		application_id=request.POST.get('application_id')
+		select=request.POST.get('select')
+		interview=request.POST.get('intdetail')
+		applications=ApplicationInfo.objects.filter(id=application_id)
+		recruiter=request.user
+		name=recruiter.first_name+" "+recruiter.last_name
+		yagmail.register(name,'rpg@recruit')
+		for application in applications:
+			if select=='True':
+				application.status=True
+				application.save()
+			receiver=application.candidate.userprofileinfo.email
+			subjects=recruiter.recruiterprofileinfo.Company_Name
+			body="Hi! "+application.candidate.first_name+" "+application.candidate.last_name
+			if select=='True':
+				body=body+", we are glad to inform you that "+recruiter.recruiterprofileinfo.Company_Name
+				body=body+" has shortlisted you for the post of "+application.job.job_name+" in their firm."
+				if interview:
+					body=body+"\nHere is a message from recruiter:\n"
+					body=body+interview+"\n";
+				body=body+"For further information cantact: "+recruiter.recruiterprofileinfo.email
+			else:
+				body=body+", we would like to inform you that "+recruiter.recruiterprofileinfo.Company_Name
+				body=body+" has rejected your application for the post of "+application.job.job_name+" in their firm."
+				if interview:
+					body=body+"\nHere is a message from recruiter:\n\n"
+					body=body+interview+"\n";
+				body=body+"For further information contact: "+recruiter.recruiterprofileinfo.email
+			email=yagmail.SMTP("rpgrecruiter@gmail.com")
+			email.send(
+				to=receiver,
+				subject=subjects,
+				contents=body,
+				)
+		args={'user':recruiter,'applications':applications}
+		return render(request,'candapplication.html',context=args)

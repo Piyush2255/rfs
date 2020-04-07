@@ -36,6 +36,7 @@
       <p id="tablehead">Recently Posted Jobs</p>
       <table>
         <tr>
+          <th><center>#</center></th>
           <th><center>Job Name</center></th>
           <th><center>Company</center></th>
           <th><center>Salary</center></th>
@@ -47,6 +48,7 @@
           {% csrf_token %}
         {% for job in jobs %}
         <tr>
+          <td>{{ forloop.counter }}</td>
           <td><button name="job_id" value="{{ job.id }}">{{ job.job_name }}</button></td>
           <td>{{ job.recruiter.recruiterprofileinfo.Company_Name}}</td>
           <td>{{ job.salary }}</td>

@@ -8,12 +8,12 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
 </head>
 <body>
-	<!-- <p>{{ user }}</p>
-	<p>{{ user.first_name }}
-	{{ user.last_name }}</p>
-	<p>{{ user.recruiterprofileinfo.email }}</p>
-	<p>{{ user.recruiterprofileinfo.Company_Name }}</p>
-	<img src="{{ user.recruiterprofileinfo.profile_pic.url }}"> -->
+	<!-- {{ user }}
+	{{ user.first_name }}
+	{{ user.last_name }}
+	{{ user.userprofileinfo.email }}
+	{{ user.userprofileinfo.profile_pic.url }}
+	<img src="{{ user.userprofileinfo.profile_pic.url }}"> -->
 	<input type="checkbox" id="check">
     <header>
       <label for="check">
@@ -25,9 +25,9 @@
         <img src="{{ user.userprofileinfo.profile_pic.url }}" class="profile_image" alt="">
         <h4>{{ user.username }}</h4>
       </center>
-      <a href="{% url 'canddashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="{% url 'canddashboard' %}" ><i class="fas fa-desktop"></i><span>Dashboard</span></a>
       <a href="#" class="active"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
-      <a href="#"><i class="fas fa-th"></i><span>Profile</span></a>
+      <a href="{% url 'candprofile' %}"><i class="fas fa-th"></i><span>Profile</span></a>
       <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
       <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
       <a href="{% url 'user_logout' %}"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
@@ -42,23 +42,9 @@
     	<center>
     		<h1 id="name">{{ user.first_name }} {{ user.last_name }}</h1>
     	</center>
-    	{% for job in jobs %}
-    	<p class='username'><strong>Job Name: </strong>{{ job.job_name }}</p>
-    	<p class='username'><strong>Job Description: </strong>{{ job.job_description }}</p>
-      <p class='username'><strong>Skills: </strong>{{ job.skill }}</p>
-      <p class='username'><strong>Experience: </strong>{{ job.experience }}</p>
-    	<p class='username'><strong>Deadline: </strong>{{ job.deadline }}</p>
-      <p class='username'><strong>Salary: </strong>{{ job.salary }}</p>
-      
-      <form action="{% url 'confirmapply' %}" enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-          <p class="username"><strong>Upload Resume: </strong>
-          <input type="file" name="resume" required></p>
-      <center>
-          <button class="btn btn-success" name="job_id" value="{{ job.id }}">Apply</button>
-      </center>
-      </form>
-      {% endfor %}
+    	<h1>You have successfully registered for job</h1>
     </div>
 </body>
 </html>
+
+
