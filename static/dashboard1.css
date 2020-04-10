@@ -55,7 +55,9 @@ header{
   transition-property: left;
 }
 
-.sidebar .profile_image{
+.sidebar .profile_image_default{
+  font-size: 100px;
+  color: white;
   width: 100px;
   height: 100px;
   border-radius: 100px;
@@ -145,7 +147,7 @@ h1{
   margin-top: 10px;
 }
 
-#tablehead{
+.tablehead{
   margin-left: 20px;
   font-size: 25px;
   font-weight: bold;
@@ -179,4 +181,12 @@ tr:hover button{
 button{
   background-color: white;
   border-width: 0px;
+}
+
+.selected{
+  color: green;
+}
+
+.notselected{
+  color: red;
 }

@@ -18,7 +18,11 @@
     </header>
     <div class="sidebar">
       <center>
+        {% if user.recruiterprofileinfo.profile_pic %}
         <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        {% else %}
+        <i class="fas fa-user profile_image_default"></i>
+        {% endif %}
         <h4>{{ user.username }}</h4>
       </center>
       <a href="{% url 'recdashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
@@ -37,8 +41,12 @@
         {% csrf_token %}
       {% for application in applications %}
       <div class="card">
-        <p>{{ forloop.counter }}. </p>
+        <p class="num">{{ forloop.counter }}. </p>
+        {% if application.candidate.userprofileinfo.profile_pic %}
         <img src="{{ application.candidate.userprofileinfo.profile_pic.url }}" class="candimage">
+        {% else %}
+        <i class="fas fa-user-circle profile_image_default"></i>
+        {% endif %}
         <button name="application_id" value="{{ application.id }}">{{ application.candidate.first_name }} {{ application.candidate.last_name }}</button>
         {% if application.status %}
         <p class="selected">Selected</p>

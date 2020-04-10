@@ -62,6 +62,15 @@ header{
   margin-bottom: 10px;
 }
 
+.sidebar .profile_image_default{
+  font-size: 100px;
+  color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
 .sidebar h4{
   color: #ccc;
   margin-top: 0;
@@ -143,6 +152,17 @@ label #sidebar_btn:hover{
 }
 
 .content .profile_image{
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  margin-bottom: 10px;
+  margin-top: 250px;
+}
+
+.content .profile_image_default{
+  font-size: 200px;
+  color: white;
+  background-color: grey;
   width: 200px;
   height: 200px;
   border-radius: 200px;

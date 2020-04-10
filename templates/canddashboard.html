@@ -18,11 +18,15 @@
     </header>
     <div class="sidebar">
       <center>
+        {% if user.userprofileinfo.profile_pic %}
         <img src="{{ user.userprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        {% else %}
+        <i class="fas fa-user profile_image_default"></i>
+        {% endif %}
         <h4>{{ user.username }}</h4>
       </center>
       <a href="#" class="active"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-      <a href="#"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
+      <a href="{% url 'alljobs' %}"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
       <a href="{% url 'candprofile' %}"><i class="fas fa-th"></i><span>Profile</span></a>
       <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
       <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
@@ -33,7 +37,7 @@
       <center>
         <h1>Dashboard</h1>
       </center>
-      <p id="tablehead">Recently Posted Jobs</p>
+      <p class="tablehead">Recently Posted Jobs</p>
       <table>
         <tr>
           <th><center>#</center></th>
@@ -44,7 +48,7 @@
           <th><center>Deadline</center></th>
         </tr>
         {% if jobs %}
-        <form action="jobapply" method="POST">
+        <form action="{% url 'jobapply' %}" method="POST">
           {% csrf_token %}
         {% for job in jobs %}
         <tr>
@@ -57,12 +61,48 @@
         </tr>
         {% endfor %}
         </form>
+        </table>
+        <a href="{% url 'alljobs' %}"><button class="btn btn-success" >View all</button></a>
         {% else %}
         <tr>
           <td>No job available yet!</td>
         </tr>
+        </table>
         {% endif %}
-      </table>
+      <p class="tablehead">Applied Jobs</p>
+      <table>
+        <tr>
+          <th><center>#</center></th>
+          <th><center>Job Name</center></th>
+          <th><center>Company</center></th>
+          <th><center>Salary</center></th>
+          <th><center>Status</center></th>
+        </tr>
+        {% if applications %}
+        <form action="{% url 'jobapply' %}" method="POST">
+          {% csrf_token %}
+        {% for application in applications %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td><button name="job_id" value="{{ application.job.id }}">{{ application.job.job_name }}</button></td>
+          <td>{{ application.job.recruiter.recruiterprofileinfo.Company_Name}}</td>
+          <td>{{ application.job.salary }}</td>
+          {% if application.status %}
+          <td class="selected">Selected</td>
+          {% else %}
+          <td class="notselected">Pending</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+        </form>
+        </table>
+        <a href="{% url 'allappjobs' %}"><button class="btn btn-success" >View all</button></a>
+        {% else %}
+        <tr>
+          <td>No job available yet!</td>
+        </tr>
+        </table>
+        {% endif %}
     </div>
 
 </body>

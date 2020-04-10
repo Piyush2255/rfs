@@ -8,12 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
 </head>
 <body>
-	<!-- <p>{{ user }}</p>
-	<p>{{ user.first_name }}
-	{{ user.last_name }}</p>
-	<p>{{ user.recruiterprofileinfo.email }}</p>
-	<p>{{ user.recruiterprofileinfo.Company_Name }}</p>
-	<img src="{{ user.recruiterprofileinfo.profile_pic.url }}"> -->
 	<input type="checkbox" id="check">
     <header>
       <label for="check">
@@ -22,7 +16,11 @@
     </header>
     <div class="sidebar">
       <center>
+        {% if user.recruiterprofileinfo.profile_pic %}
         <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        {% else %}
+        <i class="fas fa-user profile_image_default"></i>
+        {% endif %}
         <h4>{{ user.username }}</h4>
       </center>
       <a href="{% url 'recdashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
@@ -35,7 +33,12 @@
 
     <div class="content">
     	<center>
-        	<img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        	{% if user.recruiterprofileinfo.profile_pic %}
+          <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+          {% else %}
+          <!-- <i class="fas fa-user profile_image_default"></i> -->
+          <i class="fas fa-user-circle profile_image_default"></i>
+          {% endif %}
         </center>
     </div>
     <div class="info">

@@ -152,7 +152,8 @@ def canddashboard(request):
 	today=date.today()
 	today=today.strftime('%Y-%m-%d')
 	jobs=JobInfo.objects.filter(deadline__gte=today)[:5]
-	args={'user':request.user,'jobs':jobs}
+	applications=ApplicationInfo.objects.filter(candidate=request.user)
+	args={'user':request.user,'jobs':jobs,'applications':applications}
 	return render(request,'canddashboard.html',context=args)
 
 @login_required
@@ -207,7 +208,8 @@ def jobapply(request):
 	if request.method=='POST':
 		job_id=request.POST.get('job_id')
 		job=JobInfo.objects.filter(id=job_id)
-		args={'user':request.user,'jobs':job}
+		applications=ApplicationInfo.objects.filter(job=job_id,candidate=request.user)
+		args={'user':request.user,'jobs':job,'applications':applications}
 		return render(request,'jobapply.html',context=args)
 
 @login_required
@@ -286,7 +288,7 @@ def applicationstatus(request):
 				if interview:
 					body=body+"\nHere is a message from recruiter:\n"
 					body=body+interview+"\n";
-				body=body+"For further information cantact: "+recruiter.recruiterprofileinfo.email
+				body=body+"For further information contact: "+recruiter.recruiterprofileinfo.email
 			else:
 				body=body+", we would like to inform you that "+recruiter.recruiterprofileinfo.Company_Name
 				body=body+" has rejected your application for the post of "+application.job.job_name+" in their firm."
@@ -302,3 +304,17 @@ def applicationstatus(request):
 				)
 		args={'user':recruiter,'applications':applications}
 		return render(request,'candapplication.html',context=args)
+
+@login_required
+def alljobs(request):
+	today=date.today()
+	today=today.strftime('%Y-%m-%d')
+	jobs=JobInfo.objects.filter(deadline__gte=today)
+	args={'user':request.user,'jobs':jobs}
+	return render(request,'alljobs.html',context=args)
+
+@login_required
+def allappjobs(request):
+	applications=ApplicationInfo.objects.filter(candidate=request.user)
+	args={'user':request.user,'applications':applications}
+	return render(request,'allappjobs.html',context=args)

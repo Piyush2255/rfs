@@ -8,12 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
 </head>
 <body>
-	<!-- {{ user }}
-	{{ user.first_name }}
-	{{ user.last_name }}
-	{{ user.userprofileinfo.email }}
-	{{ user.userprofileinfo.profile_pic.url }}
-	<img src="{{ user.userprofileinfo.profile_pic.url }}"> -->
 	<input type="checkbox" id="check">
     <header>
       <label for="check">
@@ -22,11 +16,16 @@
     </header>
     <div class="sidebar">
       <center>
+        {% if user.userprofileinfo.profile_pic %}
         <img src="{{ user.userprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        {% else %}
+        <i class="fas fa-user profile_image_default"></i>
+        <!-- <i class="fas fa-user-circle profile_image_default"></i> -->
+        {% endif %}
         <h4>{{ user.username }}</h4>
       </center>
       <a href="{% url 'canddashboard' %}" ><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-      <a href="#"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
+      <a href="{% url 'alljobs' %}"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
       <a href="#" class="active"><i class="fas fa-th"></i><span>Profile</span></a>
       <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
       <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
@@ -35,7 +34,12 @@
 
     <div class="content">
     	<center>
-        	<img src="{{ user.userprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+        	{% if user.userprofileinfo.profile_pic %}
+          <img src="{{ user.userprofileinfo.profile_pic.url }}" class="profile_image" alt="">
+          {% else %}
+          <!-- <i class="fas fa-user profile_image_default"></i> -->
+          <i class="fas fa-user-circle profile_image_default"></i>
+          {% endif %}
         </center>
     </div>
     <div class="info">

@@ -2,10 +2,12 @@
 {% load staticfiles %}
 <html>
 <head>
-	<title>Profile</title>
+	<title>Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'applications.css' %}">
+	
+	
 </head>
 <body>
 	<input type="checkbox" id="check">
@@ -23,8 +25,8 @@
         {% endif %}
         <h4>{{ user.username }}</h4>
       </center>
-      <a href="{% url 'canddashboard' %}" ><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-      <a href="{% url 'alljobs' %}" class="active"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
+      <a href="{% url 'canddashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="#" class="active"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
       <a href="{% url 'candprofile' %}"><i class="fas fa-th"></i><span>Profile</span></a>
       <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
       <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
@@ -32,17 +34,20 @@
     </div>
 
     <div class="content">
-    	<center>
-        	<img src="{{ user.userprofileinfo.profile_pic.url }}" class="profile_image" alt="">
-        </center>
+      <center>
+        <h1>Jobs</h1>
+      </center>
+      <form action="{% url 'jobapply' %}" method="POST">
+        {% csrf_token %}
+      {% for job in jobs %}
+      <div class="card">
+        <p class="num">{{ forloop.counter }}. </p>
+        <button name="job_id" value="{{ job.id }}">{{ job.job_name }}</button>
+        <p>{{ job.recruiter.recruiterprofileinfo.Company_Name }}</p>
+      </div>
+      {% endfor %}
+      </form>
     </div>
-    <div class="info">
-    	<center>
-    		<h1 id="name">{{ user.first_name }} {{ user.last_name }}</h1>
-    	</center>
-    	<h1>You have successfully registered for job</h1>
-    </div>
+
 </body>
 </html>
-
-

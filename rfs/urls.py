@@ -40,5 +40,7 @@ urlpatterns = [
     path('viewapplications',views.viewapplications,name='viewapplications'),
     path('candapplication',views.candapplication,name='candapplication'),
     path('applicationstatus',views.applicationstatus,name='applicationstatus'),
+    path('alljobs',views.alljobs,name='alljobs'),
+    path('allappjobs',views.allappjobs,name='allappjobs'),
     path('user_logout',views.user_logout,name='user_logout')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

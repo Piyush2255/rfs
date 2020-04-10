@@ -63,6 +63,15 @@ header{
   margin-bottom: 10px;
 }
 
+.sidebar .profile_image_default{
+  font-size: 100px;
+  color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
 .sidebar h4{
   color: #ccc;
   margin-top: 0;
