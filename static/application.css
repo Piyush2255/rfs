@@ -5,7 +5,7 @@ body{
 }
 
 header{
-  /*position: fixed;*/
+  position: fixed;
   background: #22242A;
   padding: 20px;
   width: 100%;
@@ -45,7 +45,7 @@ header{
 
 .sidebar {
   background: #2f323a;
-  /*margin-top: 40px;*/
+  margin-top: 40px;
   padding-top: 30px;
   position: fixed;
   left: 0;
@@ -53,6 +53,13 @@ header{
   height: 100%;
   transition: 0.5s;
   transition-property: left;
+}
+
+.sidebar .profile_image{
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-bottom: 10px;
 }
 
 .sidebar .profile_image_default{
@@ -144,7 +151,7 @@ label #sidebar_btn:hover{
 }
 
 h1{
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 
 .candimage{
@@ -174,6 +181,7 @@ button{
   display: block;
   position: relative;
   padding-left: 35px;
+  margin-left: 50px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 22px;
@@ -181,6 +189,12 @@ button{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  transition: 0.5s;
+}
+
+#check:checked ~ .content .container{
+  margin-left: 80px;
+  transition: 0.5s;
 }
 
 /* Hide the browser's default radio button */
@@ -233,6 +247,20 @@ button{
   background: white;
 }
 
+.resume{
+  margin-left: 20px;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 22px;
+  transition: 0.5s;
+}
+
+#check:checked ~ .content .resume{
+  margin-left: 50px;
+  transition: 0.5s;
+}
+
 .formlabel{
   margin-left: 20px;
   font-weight: bold;
@@ -244,5 +272,24 @@ button{
   width: 900px;
   margin-left: 80px;
   margin-bottom: 5px;
+  transition: 0.5s;
+}
+
+#check:checked ~ .content .forminput{
+  width: 1050px;
+  margin-left: 110px;
+  transition: 0.5s;
+}
+
+.selected{
+  margin-left: 20px;
+  color: green;
+  font-size: 22px;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+#check:checked ~ .content .selected{
+  margin-left: 50px;
   transition: 0.5s;
 }

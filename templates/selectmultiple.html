@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-	<title>Application</title>
+	<title>Select Multiple</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'application.css' %}">
@@ -35,41 +35,25 @@
 
     <div class="content">
       <h1>abcd</h1>
-      {% for application in applications %}
       <center>
-        {% if application.candidate.userprofileinfo.profile_pic %}
-        <img src="{{ application.candidate.userprofileinfo.profile_pic.url }}" class="candimage">
-        {% else %}
-        <i class="fas fa-user-circle profile_image_default"></i>
-        {% endif %}
-        <h1>{{ application.candidate.first_name }} {{ application.candidate.last_name }}</h1>
+        <h1>Select Multiple</h1>
       </center>
-      <h5 class="resume">Resume: <a href="{{ application.resume.url }}">Open Resume</a></h5>
-      {% if application.status %}
-        <p class="selected">Candidate has been selected</p>
-      {% else %}
-      <form action="{% url 'applicationstatus' %}" method="POST">
+      <form action="{% url 'selectmultipleusers' %}" method="POST">
         {% csrf_token %}
-        <input type="hidden" name="application_id" value="{{ application.id }}">
-        <h5 class="resume">Want to select candidate?</h5>
-        <label class="container">Yes
-        <input type="radio" checked="checked" name="select" value="True">
-        <span class="checkmark"></span>
-        </label>
-        <label class="container">No
-        <input type="radio" checked="checked" name="select" value="False">
-        <span class="checkmark"></span>
-        </label>
+        {% for job in jobs %}
+        <input type="hidden" name="job_id" value="{{ job.id }}">
+        {% endfor %}
+        <br>
+        <h5 class="resume">Candidates: </h5>
+        <input type="number" name="candidates" placeholder="Enter no. of candidates you want to select" class="forminput" required>
         <h5 class="resume">Interview Details: </h5>
         <p>
-          <textarea rows="3" cols="80" class="forminput" placeholder="These details will be sent to applicant via email" name="intdetail"></textarea>
+          <textarea rows="3" cols="80" class="forminput" placeholder="These details will be sent to all applicants via email" name="intdetail"></textarea>
         </p>
         <center>
         <button class="btn btn-success">Confirm</button>
         </center>
       </form>
-      {% endif %}
-      {% endfor %}
     </div>
 
 </body>

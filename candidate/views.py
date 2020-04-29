@@ -11,6 +11,7 @@ from datetime import date,datetime
 from candidate.models import UserProfileInfo,RecruiterProfileInfo,JobInfo,ApplicationInfo
 from tika import parser
 import os,yagmail
+from django.contrib import messages
 # Create your views here.
 def index(request):
 	return render(request,'index.html')
@@ -133,7 +134,7 @@ def user_login(request):
 					return HttpResponseRedirect('recdashboard')
 
 		else:
-			# messages.error(request,"Invalid Login Details")
+			messages.error(request,"Invalid Login Details")
 			if is_candidate=='True':
 				return render(request,'candlogin.html')
 			else:
@@ -151,14 +152,14 @@ def user_logout(request):
 def canddashboard(request):
 	today=date.today()
 	today=today.strftime('%Y-%m-%d')
-	jobs=JobInfo.objects.filter(deadline__gte=today)[:5]
-	applications=ApplicationInfo.objects.filter(candidate=request.user)
+	jobs=JobInfo.objects.filter(deadline__gte=today).order_by('-posting_date','deadline')[:5]
+	applications=ApplicationInfo.objects.filter(candidate=request.user)[:5]
 	args={'user':request.user,'jobs':jobs,'applications':applications}
 	return render(request,'canddashboard.html',context=args)
 
 @login_required
 def recdashboard(request):
-	jobs=JobInfo.objects.filter(recruiter=request.user).order_by('-posting_date','-deadline')
+	jobs=JobInfo.objects.filter(recruiter=request.user).order_by('-posting_date','-deadline')[:5]
 	print(jobs)
 	args={'user':request.user,'jobs':jobs}
 	return render(request,'recdashboard.html',context=args)
@@ -175,7 +176,8 @@ def recprofile(request):
 
 @login_required
 def postjob(request):
-	return render(request,'postjob.html')
+	args={'user':request.user}
+	return render(request,'postjob.html',context=args)
 
 @login_required
 def jobconfirm(request):
@@ -188,11 +190,18 @@ def jobconfirm(request):
 		deaddate1=request.POST.get('deadline')
 		deaddate=datetime.strptime(deaddate1,"%Y-%m-%d")
 		today=date.today()
+		deaddate=deaddate.date()
+		if(deaddate<today):
+			errmess="Deadline can't be in the past!!!"
+			args={'user':request.user,'message':errmess}
+			return render(request,'postjob.html',context=args)
 		postdate=today.strftime("%Y-%m-%d")
 		recuser=request.user
 		JobInfo.objects.create(job_name=jobname,job_description=jobdesc,skill=skills,experience=experiences,salary=expsalary,deadline=deaddate,posting_date=postdate,recruiter=recuser)
-		args={'user':request.user,'job_name':jobname,'job_description':jobdesc,'skill':skills,'experience':experiences,'salary':expsalary,'deadline':deaddate,'posting_date':postdate}
-	return render(request,'jobconfirm.html',context=args)
+		mess="Job has been successfully posted"
+		jobs=JobInfo.objects.filter(recruiter=request.user).order_by('-posting_date','-deadline')[:5]
+		args={'user':request.user,'message':mess,'jobs':jobs}
+	return render(request,'recdashboard.html',context=args)
 
 @login_required
 def viewjob(request):
@@ -246,15 +255,21 @@ def confirmapply(request):
 
 		application.score=total_score
 		application.save()
-		args={'user':cand}
-		return render(request,'applconfirm.html',context=args)
+		mess='You have successfully applied for job!!!'
+		today=date.today()
+		today=today.strftime('%Y-%m-%d')
+		jobs=JobInfo.objects.filter(deadline__gte=today).order_by('-posting_date','deadline')[:5]
+		applications=ApplicationInfo.objects.filter(candidate=request.user)[:5]
+		args={'user':cand,'message':mess,'jobs':jobs,'applications':applications}
+		return render(request,'canddashboard.html',context=args)
 
 @login_required
 def viewapplications(request):
 	if request.method=='POST':
 		job_id=request.POST.get('job_id')
+		jobs=JobInfo.objects.filter(id=job_id)
 		applications=ApplicationInfo.objects.filter(job=job_id).order_by('-score')
-		args={'user':request.user,'applications':applications}
+		args={'user':request.user,'applications':applications,'jobs':jobs}
 		return render(request,'viewapplications.html',context=args)
 
 @login_required
@@ -274,7 +289,7 @@ def applicationstatus(request):
 		applications=ApplicationInfo.objects.filter(id=application_id)
 		recruiter=request.user
 		name=recruiter.first_name+" "+recruiter.last_name
-		yagmail.register(name,'rpg@recruit')
+		# yagmail.register(name,'rpg@recruit')
 		for application in applications:
 			if select=='True':
 				application.status=True
@@ -318,3 +333,50 @@ def allappjobs(request):
 	applications=ApplicationInfo.objects.filter(candidate=request.user)
 	args={'user':request.user,'applications':applications}
 	return render(request,'allappjobs.html',context=args)
+
+@login_required
+def allpostjobs(request):
+	jobs=JobInfo.objects.filter(recruiter=request.user).order_by('-posting_date')
+	args={'user':request.user,'jobs':jobs}
+	return render(request,'allpostjobs.html',context=args)
+
+@login_required
+def selectmultiple(request):
+	if request.method=='POST':
+		job_id=request.POST.get('job_id')
+		jobs=JobInfo.objects.filter(id=job_id)
+		args={'user':request.user,'jobs':jobs}
+		return render(request,'selectmultiple.html',context=args)
+
+@login_required
+def selectmultipleusers(request):
+	if request.method=='POST':
+		job_id=request.POST.get('job_id')
+		num=int(request.POST.get('candidates'))
+		applications=ApplicationInfo.objects.filter(job=job_id).order_by('-score')[:num]
+		interview=request.POST.get('intdetail')
+		recruiter=request.user
+		yagmail.register('rpgrecruiter@gmail.com','rpg@recruit')
+		for application in applications:
+			if application.status==False:
+				application.status=True
+				application.save()
+				receiver=application.candidate.userprofileinfo.email
+				subjects=recruiter.recruiterprofileinfo.Company_Name
+				body="Hi! "+application.candidate.first_name+" "+application.candidate.last_name
+				body=body+", we are glad to inform you that "+recruiter.recruiterprofileinfo.Company_Name
+				body=body+" has shortlisted you for the post of "+application.job.job_name+" in their firm."
+				if interview:
+					body=body+"\nHere is a message from recruiter:\n"
+					body=body+interview+"\n";
+				body=body+"For further information contact: "+recruiter.recruiterprofileinfo.email
+				email=yagmail.SMTP("rpgrecruiter@gmail.com")
+				email.send(
+					to=receiver,
+					subject=subjects,
+					contents=body,
+					)
+		applications=ApplicationInfo.objects.filter(job=job_id).order_by('-score')
+		jobs=JobInfo.objects.filter(id=job_id)
+		args={'user':recruiter,'applications':applications,'jobs':jobs}
+		return render(request,'viewapplications.html',context=args)

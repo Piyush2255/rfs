@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-	<title>Dashboard</title>
+	<title>Jobs</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'applications.css' %}">
@@ -36,17 +36,25 @@
     <div class="content">
       <center>
         <h1>Jobs</h1>
+        <h1 class="heading">Jobs</h1>
       </center>
+      {% if jobs %}
       <form action="{% url 'jobapply' %}" method="POST">
         {% csrf_token %}
       {% for job in jobs %}
       <div class="card">
-        <p class="num">{{ forloop.counter }}. </p>
-        <button name="job_id" value="{{ job.id }}">{{ job.job_name }}</button>
-        <p>{{ job.recruiter.recruiterprofileinfo.Company_Name }}</p>
+        <p class="num1">{{ forloop.counter }}. </p>
+        <button name="job_id" value="{{ job.id }}" class="jobname">{{ job.job_name }}</button>
+        <p class="company">@{{ job.recruiter.recruiterprofileinfo.Company_Name }}</p>
+        <p class="date">{{ job.posting_date }} - {{ job.deadline }}</p>
       </div>
       {% endfor %}
       </form>
+      {% else %}
+      <center>
+      <h1 class="apology">&#128531 Sorry! No Job Available</h1>
+      </center>
+      {% endif %}
     </div>
 
 </body>

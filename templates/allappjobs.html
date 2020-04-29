@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-	<title>Dashboard</title>
+	<title>Jobs</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'applications.css' %}">
@@ -36,14 +36,15 @@
     <div class="content">
       <center>
         <h1>Jobs</h1>
+        <h1>Jobs</h1>
       </center>
       <form action="{% url 'jobapply' %}" method="POST">
         {% csrf_token %}
       {% for application in applications %}
       <div class="card">
-        <p class="num">{{ forloop.counter }}. </p>
-        <button name="job_id" value="{{ application.job.id }}">{{ application.job.job_name }}</button>
-        <p>{{ application.job.recruiter.recruiterprofileinfo.Company_Name }}</p>
+        <p class="num1">{{ forloop.counter }}. </p>
+        <button name="job_id" value="{{ application.job.id }}" class="jobname">{{ application.job.job_name }}</button>
+        <p class="company">@{{ application.job.recruiter.recruiterprofileinfo.Company_Name }}</p>
         {% if application.status %}
         <p class="selected">Selected</p>
         {% else %}

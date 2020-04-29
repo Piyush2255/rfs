@@ -7,7 +7,7 @@
 .log{
 	height:100%;
 	width:100%;
-	background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_1280.jpg'); 
+	background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(images/computer.jpg); 
 	background-position: center;
 	background-size: cover;
 	position: absolute;
@@ -20,7 +20,7 @@
 	margin: 6% auto;
 	background: #fff;
 	padding: 5px;
-	/*overflow: hidden;*/
+	overflow: hidden;
 }
 
 .button-box{
@@ -64,7 +64,7 @@
 .input-group{
 	top: 100px;
 	position: absolute;
-	/*width: 280px;*/
+	width: 290px;
 	transition: .5s;
 
 }
@@ -93,7 +93,7 @@ label{
 	display: block;
 	/*margin: auto;*/
 	margin-top: 20px;
-	margin-left: 20px;
+	margin-left: 30px;
 	background: linear-gradient(to right,#ff105f, #ffad06);
 	border: 0;
 	outline: none;
@@ -116,7 +116,7 @@ span{
 }
 
 #login{
-	left:50px;
+	left:45px;
 	margin-top: 10%;
 }
 #register{

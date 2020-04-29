@@ -5,7 +5,7 @@ body{
 }
 
 header{
-  /*position: fixed;*/
+  position: fixed;
   background: #22242A;
   padding: 20px;
   width: 100%;
@@ -45,7 +45,7 @@ header{
 
 .sidebar {
   background: #2f323a;
-  /*margin-top: 40px;*/
+  margin-top: 40px;
   padding-top: 30px;
   position: fixed;
   left: 0;
@@ -58,6 +58,13 @@ header{
 .sidebar .profile_image_default{
   font-size: 100px;
   color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
+.sidebar .profile_image{
   width: 100px;
   height: 100px;
   border-radius: 100px;
@@ -144,30 +151,38 @@ label #sidebar_btn:hover{
 }
 
 h1{
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 
 .tablehead{
   margin-left: 20px;
   font-size: 25px;
   font-weight: bold;
+  margin-top: 50px;
 }
 
 table{
-  margin-left: 20px;
-  width: 800px;
+  margin-left: 50px;
+  width: 950px;
+  transition: 0.5s;
+}
+
+#check:checked ~ .content table{
+  width: 1120px;
+  transition: 0.5s;
+  margin-left: 70px;
 }
 
 th{
   border: 2px solid #19B3D3;
-  padding: 4px 4px;
+  padding: 5px 5px;
   background-color: #19B3D3;
   color: white;
 }
 
 td{
-  border: 2px solid #19B3D3;
-  padding: 4px 4px;
+  /*border: 2px solid #19B3D3;*/
+  padding: 5px 5px;
 }
 
 tr:hover{
@@ -178,9 +193,44 @@ tr:hover button{
   background-color: aliceblue;
 }
 
+.tlb{
+  border-top: 2px solid #19B3D3;
+  border-left: 2px solid #19B3D3;
+  border-bottom: 2px solid #19B3D3;
+}
+
+.tb{
+  border-top: 2px solid #19B3D3;
+  border-bottom: 2px solid #19B3D3;
+}
+
+.trb{
+  border-top: 2px solid #19B3D3;
+  border-right: 2px solid #19B3D3;
+  border-bottom: 2px solid #19B3D3;
+}
+
+.trlb{
+  border-top: 2px solid #19B3D3;
+  border-right: 2px solid #19B3D3;
+  border-left: 2px solid #19B3D3;
+  border-bottom: 2px solid #19B3D3;
+}
 button{
   background-color: white;
   border-width: 0px;
+}
+
+.btn{
+  margin-left: 50px;
+  margin-top: 10px;
+  transition: 0.5s;
+}
+
+#check:checked ~ .content .btn{
+  margin-left: 70px;
+  margin-top: 10px;
+  transition: 0.5s;
 }
 
 .selected{

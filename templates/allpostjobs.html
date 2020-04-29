@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-	<title>Applications</title>
+	<title>Jobs</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'applications.css' %}">
@@ -26,7 +26,7 @@
         <h4>{{ user.username }}</h4>
       </center>
       <a href="{% url 'recdashboard' %}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-      <a href="{% url 'postjob' %}" class="active"><i class="fas fa-briefcase"></i><span>Post Job</span></a>
+      <a href="#" class="active"><i class="fas fa-briefcase"></i><span>Find Job</span></a>
       <a href="{% url 'recprofile' %}"><i class="fas fa-th"></i><span>Profile</span></a>
       <a href="www.google.com"><i class="fas fa-info-circle"></i><span>About</span></a>
       <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->
@@ -35,38 +35,24 @@
 
     <div class="content">
       <center>
-        <h1>Alications</h1>
-        <h1>Applications</h1>
+        <h1>Jobs</h1>
+        <h1 class="heading">Jobs</h1>
       </center>
-      {% if applications %}
-      <form action="{% url 'selectmultiple' %}" method="POST">
+      {% if jobs %}
+      <form action="{% url 'viewjob' %}" method="POST">
         {% csrf_token %}
       {% for job in jobs %}
-      <button class="btn btn-dark" id="multiple_select" name="job_id" value="{{ job.id }}">Select Multiple</button>
-      {% endfor %}
-      </form>
-      <form action="{% url 'candapplication' %}" method="POST">
-        {% csrf_token %}
-      {% for application in applications %}
       <div class="card">
-        <p class="num">{{ forloop.counter }}. </p>
-        {% if application.candidate.userprofileinfo.profile_pic %}
-        <img src="{{ application.candidate.userprofileinfo.profile_pic.url }}" class="candimage">
-        {% else %}
-        <i class="fas fa-user-circle profile_image_default"></i>
-        {% endif %}
-        <button name="application_id" value="{{ application.id }}">{{ application.candidate.first_name }} {{ application.candidate.last_name }}</button>
-        {% if application.status %}
-        <p class="selected">Selected</p>
-        {% else %}
-        <p class="notselected">Not Selected</p>
-        {% endif %}
+        <p class="num1">{{ forloop.counter }}. </p>
+        <button name="job_id" value="{{ job.id }}" class="jobname">{{ job.job_name }}</button>
+        <p class="company">@{{ job.recruiter.recruiterprofileinfo.Company_Name }}</p>
+        <p class="date">{{ job.posting_date }} - {{ job.deadline }}</p>
       </div>
       {% endfor %}
       </form>
       {% else %}
       <center>
-      <h1 class="apology">&#128531 Sorry! No Application Available</h1>
+      <h1 class="apology">&#128531 Sorry! No Job Available</h1>
       </center>
       {% endif %}
     </div>

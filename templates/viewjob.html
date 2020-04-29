@@ -2,10 +2,10 @@
 {% load staticfiles %}
 <html>
 <head>
-	<title>Profile</title>
+	<title>View Job</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
 	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'viewjob1.css' %}">
 </head>
 <body>
 	<input type="checkbox" id="check">
@@ -33,25 +33,20 @@
 
     <div class="content">
     	<center>
-        	{% if user.recruiterprofileinfo.profile_pic %}
-          <img src="{{ user.recruiterprofileinfo.profile_pic.url }}" class="profile_image" alt="">
-          {% else %}
-          <!-- <i class="fas fa-user profile_image_default"></i> -->
-          <i class="fas fa-user-circle profile_image_default"></i>
-          {% endif %}
-        </center>
-    </div>
-    <div class="info">
-    	<center>
-    		<h1 id="name">{{ user.first_name }} {{ user.last_name }}</h1>
-    	</center>
+        <h1>asdfasd</h1>
+      </center>
+    	{% for job in jobs %}
+      <center>
+        <h1>{{ job.job_name }}</h1>
+        <h3 class="subhead">@{{ user.recruiterprofileinfo.Company_Name }}</h3>
+      </center>
+    	<p class='username'><strong>Description: </strong>{{ job.job_description }}</p>
+    	<p class='username'><strong>Posted On: </strong>{{ job.posting_date }}</p>
+      <p class='username'><strong>Deadline: </strong>{{ job.deadline }}</p>
+      <p class='username'><strong>Experience: </strong>{{ job.experience }}</p>
+      <p class='username'><strong>Salary: </strong>&#8377 {{ job.salary }}/- p.a.</p>
       <form action="{% url 'viewapplications' %}" method="POST">
         {% csrf_token %}
-    	{% for job in jobs %}
-    	<p class='username'><strong>Job Name: </strong>{{ job.job_name }}</p>
-    	<p class='username'><strong>Job Description: </strong>{{ job.job_description }}</p>
-    	<p class='username'><strong>Deadline: </strong>{{ job.deadline }}</p>
-      <p class='username'><strong>Salary: </strong>{{ job.salary }}</p>
       <input type="hidden" name="job_id" value="{{ job.id }}">
       {% endfor %}
       <center>

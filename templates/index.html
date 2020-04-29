@@ -66,16 +66,16 @@
 				<h3 >A complete guide for starting and ultimately ending your job search..</h3>
 			</p>
 		</div>
-		<button type="submit" class="submit-btn" ><a href="{% url 'cand_register' %}"><strong>Search</strong></a> </button>
+		<a href="{% url 'cand_register' %}"><button type="submit" class="submit-btn" ><strong>Find Job</strong></button></a>
 	</div>
 	<div id='recruiter'>
-		<img src="{% static 'images\office.jpg' %}" alt='Recruiter' id='recimg'>
+		<img src="{% static 'images\hire.jpeg' %}" alt='Recruiter' id='recimg'>
 		<h1 id='rechead'>Recruiter</h1>
 		<p>
 			<h3 id='recinfo'>A comprehensive guide for registering your company domain and ultimately start recruiting the best candidates..
 			</h3>
 		</p>
-		<button type="submit" class="submit-btn"><a href="{% url 'rec_register' %}"><strong>Post Job</strong></a> </button>
+		<a href="{% url 'rec_register' %}"><button type="submit" class="submit-btn"><strong>Post Job</strong></button></a>
 	</div>
 	<div id='sector'>
 		<h1 id='sectorhead'>SECTORS</h1>
@@ -116,8 +116,20 @@
 	</div>
 	<div id='creators'>
 		<h1 id="creatorshead">CREATORS</h1>
-		<img src="https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg" alt='Piyush' class="creatorimg" id='img1'>
-		<img src="https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg" alt='Rahul' class="creatorimg" id='img2'>
+		<div class="row">
+		<div class="card" id="creatorcard1">
+			<div class="card-body creator-body">
+				<h6 class="card-title">Piyush</h6>
+				<p>Piyush is currently persuing his undergraduate degree in Computer Science from Punjab Engineering College.</p>
+			</div>
+		</div>
+		<div class="card" id="creatorcard2">
+			<div class="card-body creator-body">
+				<h6 class="card-title">Rahul</h6>
+				<p>Rahul is currently persuing his undergraduate degree in Computer Science from Punjab Engineering College.</p>
+			</div>
+		</div>
+		</div>
 	</div>
 </body>
 </html>

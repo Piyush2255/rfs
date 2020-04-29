@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-  <title></title>
+  <title>Post Job</title>
   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-4.3.1-dist\css\bootstrap.css' %}" >
   <link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-5.11.2-web\css\all.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'postjob1.css' %}">
@@ -74,7 +74,7 @@
           <label class="formlabel">Salary: </label>
         </p>
         <p>
-          <input type="number" name="salary" placeholder="Expected Salary" class="forminput" required>
+          <input type="number" name="salary" placeholder="Expected Salary per annum (in &#8377)" class="forminput" required>
         </p>
         <p>
           <label class="formlabel">Deadline: </label>
@@ -82,6 +82,9 @@
         <p>
           <input type="date" name="deadline" class="forminput" required>
         </p>
+        {% if message %}
+        <p class='errormessage'>{{ message }}</p>
+        {% endif %}
         <center>
         <button type="submit" class="btn btn-success" id="formbutton">Submit</button>
         </center>
